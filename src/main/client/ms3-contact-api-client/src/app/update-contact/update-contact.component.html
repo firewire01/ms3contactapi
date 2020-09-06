@@ -1,0 +1,99 @@
+<h3>Update Contact</h3>
+<div style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">First Name</label>
+      <input type="text" class="form-control" id="firstName" required [(ngModel)]="contact.Identification.firstName" name="firstName">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Last Name</label>
+      <input type="text" class="form-control" id="lastName" required [(ngModel)]="contact.Identification.lastName" name="lastName">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Date of Birth</label>
+      <!--<input type="text" class="form-control" id="dob" required [(ngModel)]="contact.dob" name="dob">-->
+      <input matInput [matDatepicker]="picker" class="form-control" id="dob" required [(ngModel)]="contact.Identification.dob" name="dob">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </div>
+
+    <div class="form-group">
+
+      <label for="name">Gender</label>
+      <div>
+        <select matNativeControl [(ngModel)]="contact.Identification.gender" name="gender">
+          <option [value]="null"></option>
+          <option *ngFor="let gender of genders" [value]="gender.value">
+            {{gender.viewValue}}
+          </option>
+        </select>
+      </div>
+      <!--<input type="text" class="form-control" id="gender" required [(ngModel)]="contact.Idenfication.gender" name="gender">-->
+    </div>
+
+    <div class="form-group">
+      <label for="name">Title</label>
+      <input type="text" class="form-control" id="title" required [(ngModel)]="contact.Identification.title" name="title">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Address: </label>
+      <div>
+        <button type="button" class="btn btn-info" (click)="addAddress()">Add Address</button>
+      </div>
+      <div>
+        <ul class="outer_ul">
+          <li *ngFor="let add of addresses | async; let i = index">
+            <label for="name">Type</label>
+            <input type="text" class="form-control" required [(ngModel)]="add.type" [name]="'type' + 1">
+            <label for="name">Number</label>
+            <input type="text" class="form-control" required [(ngModel)]="add.number" [name]="'number' + 1">
+            <label for="name">Street</label>
+            <input type="text" class="form-control" required [(ngModel)]="add.street" [name]="'street' + 1">
+            <label for="name">Unit</label>
+            <input type="text" class="form-control" required [(ngModel)]="add.unit" [name]="'unit' + 1">
+            <label for="name">City</label>
+            <input type="text" class="form-control" required [(ngModel)]="add.city" [name]="'city' + 1">
+            <label for="name">State</label>
+            <input type="text" class="form-control" required [(ngModel)]="add.state" [name]="'state' + 1">
+            <label for="name">Zipcode</label>
+            <input type="text" class="form-control" required [(ngModel)]="add.zipcode" [name]="'zipcode' + 1">
+            <button type="button" class="btn btn-danger component" (click)="removeAddress(add)">X</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Communication: </label>
+      <div>
+        <button type="button" class="btn btn-info" (click)="addComm()">Add Communication</button>
+      </div>
+      <ul class="outer_ul">
+        <li *ngFor="let com of comms | async; let i = index">
+          <label for="name">Type</label>
+          <input type="text" class="form-control" required [(ngModel)]="com.type" [name]="'type' + i">
+          <label for="name">Value</label>
+          <input type="text" class="form-control" required [(ngModel)]="com.value" [name]="'value' + i">
+          <label for="name">Preferred</label>
+          <div>
+            <select matNativeControl [(ngModel)]="com.preferred" [name]="'preferred' + i">
+              <option *ngFor="let option of options" [value]="option.value">
+                {{option.viewValue}}
+              </option>
+            </select>
+          </div>
+          <button type="button" class="btn btn-danger component" (click)="removeComm(com)">X</button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="btn-group">
+      <button (click)="list()" class="btn btn-primary button_group">Back to Contact List</button><br>
+      <button type="submit" class="btn btn-success button_group">Submit</button>
+    </div>
+    
+  </form>
+</div>

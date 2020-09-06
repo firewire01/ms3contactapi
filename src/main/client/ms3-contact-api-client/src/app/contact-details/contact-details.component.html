@@ -1,0 +1,63 @@
+<h2>Contact Details</h2> 
+
+<hr/>
+<div *ngIf="contact">
+  <div>
+    <label><b>Id: </b></label> {{contact.Identification.id}}
+  </div>
+  <div>
+    <label><b>First Name: </b></label> {{contact.Identification.firstName}}
+  </div>
+  <div>
+    <label><b>Last Name: </b></label> {{contact.Identification.lastName}}
+  </div>
+  <div>
+    <label><b>Date of birth: </b></label> {{contact.Identification.dob}}
+  </div>
+  <div>
+    <label><b>Gender: </b></label> {{getGenderView(contact.Identification.gender)}}
+  </div>
+  <div>
+    <label><b>Title: </b></label> {{contact.Identification.title}}
+  </div>
+  <div>
+    <label><b>Address: </b></label>
+    <ul class="outer_ul">
+      <li *ngFor="let a of contact.Address">
+        <ul class="inner_ul">
+          <li><label><b>Id: </b></label> <span>{{a.id}}</span></li>
+          <li><label><b>Type: </b></label> <span>{{a.type}}</span></li>
+          <li><label><b>Number: </b></label> <span>{{a.number}}</span></li>
+          <li><label><b>Street: </b></label> <span>{{a.street}}</span></li>
+          <li><label><b>Unit: </b></label> <span>{{a.unit}}</span></li>
+          <li><label><b>City: </b></label> <span>{{a.city}}</span></li>
+          <li><label><b>State: </b></label> <span>{{a.state}}</span></li>
+          <li><label><b>Zipcode: </b></label> <span>{{a.zipcode}}</span></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <label><b>Communication: </b></label>
+    <ul class="outer_ul">
+      <li *ngFor="let c of contact.Communication">
+        <ul class="inner_ul">
+          <li><label><b>Id: </b></label> <span>{{c.id}}</span></li>
+          <li><label><b>Type: </b></label> <span>{{c.type}}</span></li>
+          <li><label><b>Value: </b></label> <span>{{c.value}}</span></li>
+          <li><label><b>Preferred: </b></label> <span>{{c.preferred}}</span></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<br>
+<br>
+<div class="btn-group">
+  <button (click)="list()" class="btn btn-primary button_group" >Back to Contact List</button><br>
+  <button (click)="updateContact(contact.Identification.id)" class="btn btn-info button_group" style="">Update</button>
+  <button (click)="deleteContact(contact.Identification.id)" class="btn btn-danger button_group">Delete</button>
+</div>
+
+

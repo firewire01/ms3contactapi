@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\e2e",
+    "\\e2e\\src",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\create-employee",
+    "\\src\\app\\employee-details",
+    "\\src\\app\\employee-list",
+    "\\src\\app\\update-employee",
+    "\\src\\environments"
+  ],
+  "SelectedNode": "\\src\\app\\employee.service.spec.ts",
+  "PreviewInSolutionExplorer": false
+}
