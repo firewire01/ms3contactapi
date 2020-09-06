@@ -118,7 +118,7 @@
 	  <version>1.7.6</version>
 	  <configuration>
 	<installDirectory>root</installDirectory>
-	<workingDirectory>src/main/ui</workingDirectory>
+	<workingDirectory>src/main/client/ms3-contact-api-client</workingDirectory>
   </configuration>
 	  <executions>
 	      <execution>
