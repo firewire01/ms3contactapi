@@ -7,13 +7,8 @@ import { Communication } from '../contact-component/communication';
 import * as moment from 'moment';
 import { Gender } from '../create-contact/create-contact.component';
 import { Option } from '../create-contact/create-contact.component';
-/*import { Observable } from "rxjs/Observable";
-import { Subject } from "rxjs/Subject";
-import { List } from 'immutable';
-import { asObservable } from "./asObservable";
-import { BehaviorSubject } from "rxjs/Rx";*/
 import { Observable, BehaviorSubject } from 'rxjs';
-import { List } from 'immutable';
+
 
 @Component({
   selector: 'app-update-contact',

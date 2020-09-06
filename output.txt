@@ -1,0 +1,138 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for net.guides.springboot2:springboot2-jpa-crud-example:jar:0.0.1-SNAPSHOT
+[WARNING] 'build.plugins.plugin.(groupId:artifactId)' must be unique but found duplicate declaration of plugin org.springframework.boot:spring-boot-maven-plugin @ line 232, column 10
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] --------< net.guides.springboot2:springboot2-jpa-crud-example >---------
+[INFO] Building springboot2-jpa-crud-example 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ springboot2-jpa-crud-example ---
+[INFO] Deleting D:\App_Development\contract_api\final_version\ms3contactapi\target
+[INFO] 
+[INFO] --- exec-maven-plugin:1.6.0:exec (gulp install) @ springboot2-jpa-crud-example ---
++ gulp@4.0.2
+updated 1 package and audited 594 packages in 11.395s
+
+5 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+[INFO] 
+[INFO] --- exec-maven-plugin:1.6.0:exec (del install) @ springboot2-jpa-crud-example ---
++ del@5.1.0
+updated 1 package and audited 594 packages in 12.273s
+
+5 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+[INFO] 
+[INFO] --- exec-maven-plugin:1.6.0:exec (log install) @ springboot2-jpa-crud-example ---
++ fancy-log@1.3.3
+updated 1 package and audited 594 packages in 12.786s
+
+5 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+[INFO] 
+[INFO] --- apt-maven-plugin:1.1.3:process (default) @ springboot2-jpa-crud-example ---
+[INFO] 
+[INFO] --- frontend-maven-plugin:1.7.6:install-node-and-npm (install node and npm) @ springboot2-jpa-crud-example ---
+[INFO] Node v10.15.3 is already installed.
+[INFO] NPM 6.9.0 is already installed.
+[INFO] 
+[INFO] --- frontend-maven-plugin:1.7.6:npm (npm install) @ springboot2-jpa-crud-example ---
+[INFO] Running 'npm install' in D:\App_Development\contract_api\final_version\ms3contactapi\src\main\client\ms3-contact-api-client
+[WARNING] npm WARN @angular/animations@8.2.14 requires a peer of @angular/core@8.2.14 but none is installed. You must install peer dependencies yourself.
+[WARNING] npm WARN bootstrap@4.5.2 requires a peer of popper.js@^1.16.1 but none is installed. You must install peer dependencies yourself.
+[WARNING] npm WARN karma-jasmine-html-reporter@1.5.4 requires a peer of jasmine-core@>=3.5 but none is installed. You must install peer dependencies yourself.
+[WARNING] npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.3 (node_modules\fsevents):
+[WARNING] npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.3: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+[INFO] audited 1325 packages in 33.467s
+[WARNING] npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\watchpack-chokidar2\node_modules\fsevents):
+[INFO] found 4 low severity vulnerabilities
+[WARNING] npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+[INFO]   run `npm audit fix` to fix them, or `npm audit` for details
+[WARNING] npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\karma\node_modules\fsevents):
+[WARNING] npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+[WARNING] npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\@angular\compiler-cli\node_modules\fsevents):
+[WARNING] npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+[WARNING] npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\webpack-dev-server\node_modules\fsevents):
+[WARNING] npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+[ERROR] 
+[INFO] 
+[INFO] --- frontend-maven-plugin:1.7.6:npm (prod build) @ springboot2-jpa-crud-example ---
+[INFO] npm not inheriting proxy config from Maven
+[INFO] Running 'npm run build-prod' in D:\App_Development\contract_api\final_version\ms3contactapi\src\main\client\ms3-contact-api-client
+[INFO] 
+[INFO] > angular8-springboot-client@0.0.0 build-prod D:\App_Development\contract_api\final_version\ms3contactapi\src\main\client\ms3-contact-api-client
+[INFO] > ng build --prod --deploy-url /client/ms3-contact-api-client/
+[INFO] 
+[ERROR] Browserslist: caniuse-lite is outdated. Please run the following command: `npx browserslist --update-db`
+[INFO] Generating ES5 bundles for differential loading...
+[INFO] ES5 bundle generation complete.
+[INFO] 
+[INFO] chunk {2} polyfills-es2015.ffa9bb4e015925544f91.js (polyfills) 36.3 kB [initial] [rendered]
+[INFO] chunk {3} polyfills-es5.44547b4d4a23c72d0f9c.js (polyfills-es5) 127 kB [initial] [rendered]
+[INFO] chunk {0} runtime-es2015.119a2543449693fc46e0.js (runtime) 1.48 kB [entry] [rendered]
+[INFO] chunk {0} runtime-es5.119a2543449693fc46e0.js (runtime) 1.48 kB [entry] [rendered]
+[INFO] chunk {1} main-es2015.78fe1c3f89cecc0450d7.js (main) 919 kB [initial] [rendered]
+[INFO] chunk {1} main-es5.78fe1c3f89cecc0450d7.js (main) 1020 kB [initial] [rendered]
+[INFO] chunk {4} styles.64bfc4e60258882df2c7.css (styles) 202 kB [initial] [rendered]
+[INFO] Date: 2020-09-06T19:13:17.032Z - Hash: 9837838d623b2b3e8b09 - Time: 122250ms
+[INFO] 
+[INFO] --- exec-maven-plugin:1.6.0:exec (gulp build) @ springboot2-jpa-crud-example ---
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.2:resources (default-resources) @ springboot2-jpa-crud-example ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ springboot2-jpa-crud-example ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 23 source files to D:\App_Development\contract_api\final_version\ms3contactapi\target\classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.2:testResources (default-testResources) @ springboot2-jpa-crud-example ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory D:\App_Development\contract_api\final_version\ms3contactapi\src\test\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ springboot2-jpa-crud-example ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 2 source files to D:\App_Development\contract_api\final_version\ms3contactapi\target\test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.21.0:test (default-test) @ springboot2-jpa-crud-example ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- maven-jar-plugin:3.0.2:jar (default-jar) @ springboot2-jpa-crud-example ---
+[INFO] Building jar: D:\App_Development\contract_api\final_version\ms3contactapi\target\springboot2-jpa-crud-example-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot-maven-plugin:2.0.5.RELEASE:repackage (default) @ springboot2-jpa-crud-example ---
+[INFO] Replacing main artifact D:\App_Development\contract_api\final_version\ms3contactapi\target\springboot2-jpa-crud-example-0.0.1-SNAPSHOT.jar to D:\App_Development\contract_api\final_version\ms3contactapi\docker\springboot2-jpa-crud-example-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ springboot2-jpa-crud-example ---
+[INFO] Installing D:\App_Development\contract_api\final_version\ms3contactapi\docker\springboot2-jpa-crud-example-0.0.1-SNAPSHOT.jar to C:\Users\Marlon Ancajas\.m2\repository\net\guides\springboot2\springboot2-jpa-crud-example\0.0.1-SNAPSHOT\springboot2-jpa-crud-example-0.0.1-SNAPSHOT.jar
+[INFO] Installing D:\App_Development\contract_api\final_version\ms3contactapi\pom.xml to C:\Users\Marlon Ancajas\.m2\repository\net\guides\springboot2\springboot2-jpa-crud-example\0.0.1-SNAPSHOT\springboot2-jpa-crud-example-0.0.1-SNAPSHOT.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  05:11 min
+[INFO] Finished at: 2020-09-07T03:14:05+08:00
+[INFO] ------------------------------------------------------------------------
