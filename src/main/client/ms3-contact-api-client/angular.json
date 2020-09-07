@@ -133,9 +133,7 @@
               "configuration": "production",
               "region": "ap-southeast-1",
               "bucket": "ng-contact-management",
-              "subFolder": "contact-management",
-              "secretAccessKey": "UlSoLIfs+CZWTty9zyDWIaVDcl9PcTU5W6q/kSc6",
-              "accessKeyId": "AKIAIL3I5FYLX436Z6BA"
+              "subFolder": "contact-management"
             }
           }
         }
