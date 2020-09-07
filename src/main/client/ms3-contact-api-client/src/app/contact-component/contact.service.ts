@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ContactService {
 
-  private baseUrl = 'http://localhost:8080/springboot-crud-rest/api/v1/contacts';
+  private baseUrl = '/api/v1/contacts';
 
   constructor(private http: HttpClient) { }
 

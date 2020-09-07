@@ -50,6 +50,11 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
               ]
             }
@@ -58,7 +63,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular8-springboot-client:build"
+            "browserTarget": "angular8-springboot-client:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -116,6 +122,20 @@
           "configurations": {
             "production": {
               "devServerTarget": "angular8-springboot-client:serve:production"
+            }
+          }
+        },
+        "deploy": {
+          "builder": "@jefiozie/ngx-aws-deploy:deploy",
+          "options": {},
+          "configurations": {
+            "production": {
+              "configuration": "production",
+              "region": "ap-southeast-1",
+              "bucket": "ng-contact-management",
+              "subFolder": "contact-management",
+              "secretAccessKey": "UlSoLIfs+CZWTty9zyDWIaVDcl9PcTU5W6q/kSc6",
+              "accessKeyId": "AKIAIL3I5FYLX436Z6BA"
             }
           }
         }

@@ -6,7 +6,6 @@ import { ContactListComponent } from './contact-list/contact-list.component';
 import { UpdateContactComponent } from './update-contact/update-contact.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'employee', pathMatch: 'full' },
   { path: 'contacts', component: ContactListComponent },
   { path: 'addcontact', component: CreateContactComponent },
   { path: 'contactupdate/:id', component: UpdateContactComponent },
