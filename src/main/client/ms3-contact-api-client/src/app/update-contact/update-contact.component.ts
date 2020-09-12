@@ -65,6 +65,9 @@ export class UpdateContactComponent implements OnInit {
         this.addresses = this.contact.Address;
         this.comms = this.contact.Communication;
 
+        this.contact.Address = [];
+        this.contact.Communication = [];
+
       }, error => {console.log(error);
                          alert(error.message);});
   }
@@ -74,11 +77,13 @@ export class UpdateContactComponent implements OnInit {
   }
 
   updateContact() {
-    var date = moment(this.contact.Identification.dob).format('MM/DD/yyyy');
-    this.contact.Identification.dob = date;
+    //var date = datePipe.format('MM/DD/yyyy');
+    //this.contact.Identification.dob = date;
 
     this.contact.Address = this.addresses;
     this.contact.Communication = this.comms;
+
+    console.log(this.contact);
 
     this.contactService.updateContact(this.contact)
       .subscribe(data => {

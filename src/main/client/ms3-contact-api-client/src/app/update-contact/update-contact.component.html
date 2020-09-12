@@ -21,8 +21,8 @@
 
     <div class="form-group">
       <label for="dob">Date of Birth</label>
-      <input type="date" matInput class="form-control" id="dob" required [(ngModel)]="contact.Identification.dob"
-             name="dob" #dob="ngModel" name="dob" [ngClass]="{ 'is-invalid': dob.touched && dob.invalid }" value="{{contact.Identification.dob}}">
+      <input type="date" matInput class="form-control" id="dob" required [ngModel]="contact.Identification.dob | date: 'MM/dd/yyyy'"
+             name="dob" #dob="ngModel" name="dob" [ngClass]="{ 'is-invalid': dob.touched && dob.invalid }">
       <div *ngIf="dob.touched && dob.invalid" class="invalid-feedback">
         <div *ngIf="dob.errors.required && dob.touched">Date of Birth is required</div>
         <div *ngIf="dob.errors.date">Date of Birth must be a valid Date of Birth</div>
@@ -70,7 +70,7 @@
           <div *ngIf="addresses.length < 1 && aType.errors.required && aType.touched">Address type is required</div>
         </div>
         <label for="a-number">Number</label>
-        <input type="text" class="form-control" [(ngModel)]="add.number" name="number" id="a-number">
+        <input type="number" class="form-control" [(ngModel)]="add.number" name="number" id="a-number">
         <label for="a-street">Street</label>
         <input type="text" class="form-control" [(ngModel)]="add.street" name="street" id="a-street"
                #street="ngModel" [ngClass]="{ 'is-invalid': addresses.length < 1 && street.touched && street.invalid }" >

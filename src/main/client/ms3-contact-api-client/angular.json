@@ -128,8 +128,6 @@
         "deploy": {
           "builder": "@jefiozie/ngx-aws-deploy:deploy",
           "options": {
-            "secretAccessKey": "sT6BKgHhDRjfWrSMa4TLwt8nbFiYBSTnUCx4UJZT",
-            "accessKeyId": "AKIAISE4FHKYC6E3CQQQ",
             "region": "ap-southeast-1",
             "bucket": "ng-contact-management"
           },
@@ -138,10 +136,7 @@
               "configuration": "production",
               "region": "ap-southeast-1",
               "bucket": "ng-contact-management",
-              "subFolder": "contact-management",
-              "secretAccessKey": "sT6BKgHhDRjfWrSMa4TLwt8nbFiYBSTnUCx4UJZT",
-              "accessKeyId": "AKIAISE4FHKYC6E3CQQQ"
-
+              "subFolder": "contact-management"
             }
           }
         }
