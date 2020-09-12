@@ -68,13 +68,13 @@
 		- type - string - not null
 		- value - string - not null 
 		- preferred - string - not null
-*api
+# API
 	-  /contacts -> GET - return the list of contacts
 	- /contacts/{id} -> GET - return contact by ID.
 	- /contacts -> POST - creation of contact
 	- /contacts -> PUT - Update of contact
 	- /contacts/{id} -> DELETE -> deletion per contact id.
-#How to run app. 
+# How to run app. 
 - This lunch in the AWS - Elastic Beanstalk
 - Url: http://ms3contactapi-env-1.eba-zygynhxc.ap-southeast-1.elasticbeanstalk.com:8080
   *Note: this is just a free tier not sure if the dns will change. please contact me if the link is not accessable.
