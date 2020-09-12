@@ -21,7 +21,9 @@
 
     <div class="form-group">
       <label for="dob">Date of Birth</label>
-      <input type="date" matInput class="form-control" id="dob" required [ngModel]="contact.Identification.dob | date: 'MM/dd/yyyy'"
+      <input type="date" matInput class="form-control" id="dob" required
+             [ngModel]="date | date:'yyyy-MM-dd'"
+             (ngModelChange)="date = $event"
              name="dob" #dob="ngModel" name="dob" [ngClass]="{ 'is-invalid': dob.touched && dob.invalid }">
       <div *ngIf="dob.touched && dob.invalid" class="invalid-feedback">
         <div *ngIf="dob.errors.required && dob.touched">Date of Birth is required</div>
@@ -60,7 +62,7 @@
 
       <div>
         <button type="button" class="btn btn-info" (click)="addAddress()"
-                [disabled]="!add.type || !add.street || !add.city">Add Address</button>
+                [disabled]="!add.type || !add.street || !add.city">Add More Address</button>
       </div>
       <div class="add-dev">
         <label for="a-type">Type</label>
@@ -106,7 +108,7 @@
       <label>Communication: </label>
       <div>
         <button type="button" class="btn btn-info" (click)="addComm()"
-                [disabled]="!com.type || !com.value">Add Communication</button>
+                [disabled]="!com.type || !com.value">Add More Communication</button>
       </div>
       <div class="add-dev">
         <label for="c-type">Type</label>
@@ -117,10 +119,10 @@
         </div>
         <label for="c-value">Value</label>
         <input type="text" class="form-control"  [(ngModel)]="com.value" name="value" id="c-value"
-               *ngIf="com.type !== 'email'" #value="ngModel" [ngClass]="{ 'is-invalid': comms.length < 1 && value.touched && value.invalid }">
-        <input type="email" class="form-control"  [(ngModel)]="com.value" name="value" id="e-value"
-               *ngIf="com.type === 'email'"
-               #email="ngModel" [ngClass]="{ 'is-invalid': comms.length < 1 && email.touched && email.invalid }" >
+               #value="ngModel" [ngClass]="{ 'is-invalid': comms.length < 1 && value.touched && value.invalid }">
+        <div *ngIf="comms.length < 1 && value.touched && value.invalid" class="invalid-feedback">
+          <div *ngIf="comms.length < 1 && value.touched && value.invalid">Communication type is required</div>
+        </div>
         <label for="c-preferred">Preferred</label>
         <div>
           <select matNativeControl [(ngModel)]="com.preferred" name="preferred" id="c-preferred"
@@ -148,8 +150,12 @@
 
     </div>
 
-    <button type="submit" class="btn submit-btn btn-success" [disabled]="!f.form.valid || addresses.length < 1 ||
-                  comms.length < 1 ">Submit</button>
+    <div class="btn-group">
+      <button type="button" (click)="gotoList()" class="btn btn-primary button_group" >Back to Contact List</button><br>
+      <button type="button" (click)="reset()" class="btn btn-info button_group">Reset</button>
+      <button type="submit" class="btn button_group btn-success" [disabled]="!f.form.valid">Update</button>
+    </div>
+
     <div><label><h4><i>Please note to supply all valid fields and required.</i></h4></label></div>
   </form>
 </div>

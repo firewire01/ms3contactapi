@@ -13,7 +13,7 @@ export interface Gender {
 }
 
 export interface Option {
-  value: string;
+  value: boolean;
   viewValue: string;
 }
 
@@ -30,6 +30,7 @@ export class CreateContactComponent implements OnInit {
   comms: Communication[] = [];
   add : Address = new Address();
   com : Communication = new Communication();
+  errorMessage: string = "";
 
   genders: Gender[] = [
     { value: 'M', viewValue: 'Male' },
@@ -37,8 +38,8 @@ export class CreateContactComponent implements OnInit {
   ];
 
   options: Option[] = [
-    { value: 'true', viewValue: 'True' },
-    { value: 'false', viewValue: 'False' }
+    { value: true, viewValue: 'True' },
+    { value: false, viewValue: 'False' }
   ];
 
   constructor(private contactService: ContactService,
@@ -101,8 +102,39 @@ export class CreateContactComponent implements OnInit {
   }
 
   onSubmit() {
-    this.save();
-  }
+
+      if(this.add.type && this.add.street && this.add.city){
+         this.addAddress();
+      }
+
+      if(this.com.type && this.com.value){
+          this.addComm();
+      }
+
+      if(this.validForm()){
+         this.save();
+      }else{
+        alert(this.errorMessage);
+        this.errorMessage = "";
+      }
+    }
+
+    validForm() : boolean {
+
+       let result = true;
+
+       if(this.addresses.length < 1){
+          this.errorMessage += "Address is required please add either one input. ";
+          result = false;
+       }
+
+       if(this.comms.length < 1){
+          this.errorMessage += "Communication is required please add either one input. ";
+          result = false;
+       }
+
+       return result;
+    }
 
   addAddress() {
     this.addresses.push(this.add);
@@ -121,10 +153,6 @@ export class CreateContactComponent implements OnInit {
   deleteComm(index){
       this.comms.splice(index, 1);
   }
-
-  public myDatePickerOptions: any = {
-    // this is create the date picker
-  };
 
   gotoList() {
     this.router.navigate(['/contacts']);

@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { Gender } from '../create-contact/create-contact.component';
 import { Option } from '../create-contact/create-contact.component';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -24,6 +25,9 @@ export class UpdateContactComponent implements OnInit {
   comms: Communication[] = [];
   add : Address = new Address();
   com : Communication = new Communication();
+  date : Date = new Date();
+  datepipe : DatePipe;
+  errorMessage: string = "";
 
   genders: Gender[] = [
     { value: 'M', viewValue: 'Male' },
@@ -31,14 +35,15 @@ export class UpdateContactComponent implements OnInit {
   ];
 
   options: Option[] = [
-    { value: 'false', viewValue: 'False' },
-    { value: 'true', viewValue: 'True' }
+    { value: false , viewValue: 'False' },
+    { value: true, viewValue: 'True' }
 
   ];
 
 
   constructor(private route: ActivatedRoute,private router: Router,
-    private contactService: ContactService) {
+    private contactService: ContactService, public datePipe: DatePipe) {
+    this.datepipe =  datePipe;
     this.contact.Identification = {
       id: 0,
       firstName: '',
@@ -48,28 +53,35 @@ export class UpdateContactComponent implements OnInit {
       title: ''
     }
 
-    this.id = this.route.snapshot.params['id'];
+    this.reload();
 
-    this.contactService.getContact(this.id)
-      .subscribe(data => {
-        console.log(data)
-        this.contact = data;
+  }
 
-        for (let i = 0; i < this.contact.Communication.length; i++) {
-          let preferred = this.contact.Communication[i].preferred;
-          if (preferred == null || preferred == undefined) {
-            this.contact.Communication[i].preferred = false;
-          }
-        }
+  reload(){
+      this.id = this.route.snapshot.params['id'];
 
-        this.addresses = this.contact.Address;
-        this.comms = this.contact.Communication;
+          this.contactService.getContact(this.id)
+            .subscribe(data => {
+              console.log(data)
+              this.contact = data;
 
-        this.contact.Address = [];
-        this.contact.Communication = [];
+              for (let i = 0; i < this.contact.Communication.length; i++) {
+                let preferred = this.contact.Communication[i].preferred;
+                if (preferred == null || preferred == undefined) {
+                  this.contact.Communication[i].preferred = false;
+                }
+              }
 
-      }, error => {console.log(error);
-                         alert(error.message);});
+              this.addresses = this.contact.Address;
+              this.comms = this.contact.Communication;
+
+              this.date = new Date(this.contact.Identification.dob);
+
+              this.contact.Address = [];
+              this.contact.Communication = [];
+
+            }, error => {console.log(error);
+                               alert(error.message);});
   }
 
   ngOnInit() {
@@ -77,8 +89,7 @@ export class UpdateContactComponent implements OnInit {
   }
 
   updateContact() {
-    //var date = datePipe.format('MM/DD/yyyy');
-    //this.contact.Identification.dob = date;
+    this.contact.Identification.dob = this.datepipe.transform(this.date, 'MM/dd/yyyy');
 
     this.contact.Address = this.addresses;
     this.contact.Communication = this.comms;
@@ -96,16 +107,59 @@ export class UpdateContactComponent implements OnInit {
                          this.submitted = false});
   }
 
+
+
   onSubmit() {
-    this.updateContact();
+
+    if(this.add.type && this.add.street && this.add.city){
+       this.addAddress();
+    }
+
+    if(this.com.type && this.com.value){
+        this.addComm();
+    }
+
+    if(this.validForm()){
+       this.updateContact();
+    }else{
+      alert(this.errorMessage);
+      this.errorMessage = "";
+    }
+  }
+
+  validForm() : boolean {
+
+     let result = true;
+
+     if(this.addresses.length < 1){
+        this.errorMessage += "Address is required please add either one input. ";
+        result = false;
+     }
+
+     if(this.comms.length < 1){
+        this.errorMessage += "Communication is required please add either one input. ";
+        result = false;
+     }
+
+     return result;
+  }
+
+  isDate(dateStr) {
+    return !isNaN(new Date(dateStr).getDate());
+  }
+
+  reset() {
+      this.reload();
   }
 
   addAddress() {
+      this.add.id = 0;
       this.addresses.push(this.add);
       this.add = new Address();
     }
 
     addComm() {
+      this.com.id = 0;
       this.comms.push(this.com);
       this.com = new Communication();
     }
@@ -121,8 +175,4 @@ export class UpdateContactComponent implements OnInit {
   gotoList() {
     this.router.navigate(['/contacts']);
   }
-
-  public myDatePickerOptions: any = {
-    // Your options
-  };
 }

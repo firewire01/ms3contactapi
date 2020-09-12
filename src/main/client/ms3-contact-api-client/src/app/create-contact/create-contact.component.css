@@ -44,3 +44,17 @@ li {
  height: 3em;
  width: 11em;
 }
+
+.button_group {
+   margin-top: 5em;
+   margin-bottom: 10px;
+   margin-left: 10px;
+   margin-right: 10px;
+   height: 3em;
+   width: 11em;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}

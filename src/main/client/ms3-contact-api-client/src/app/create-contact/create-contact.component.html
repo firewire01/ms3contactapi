@@ -60,7 +60,7 @@
 
       <div>
         <button type="button" class="btn btn-info" (click)="addAddress()"
-                [disabled]="!add.type || !add.street || !add.city">Add Address</button>
+                [disabled]="!add.type || !add.street || !add.city">Add More Address</button>
       </div>
       <div class="add-dev">
         <label for="a-type">Type</label>
@@ -106,7 +106,7 @@
       <label>Communication: </label>
       <div>
         <button type="button" class="btn btn-info" (click)="addComm()"
-                [disabled]="!com.type || !com.value">Add Communication</button>
+                [disabled]="!com.type || !com.value">Add More Communication</button>
       </div>
       <div class="add-dev">
         <label for="c-type">Type</label>
@@ -148,8 +148,11 @@
 
     </div>
 
-    <button type="submit" class="btn submit-btn btn-success" [disabled]="!f.form.valid || addresses.length < 1 ||
-                  comms.length < 1 ">Submit</button>
+    <div class="btn-group">
+      <button type="button" (click)="gotoList()" class="btn btn-primary button_group" >Back to Contact List</button><br>
+      <button type="submit" class="btn button_group btn-success" [disabled]="!f.form.valid">Submit</button>
+    </div>
+
     <div><label><h4><i>Please note to supply all valid fields and required.</i></h4></label></div>
   </form>
 </div>
