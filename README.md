@@ -54,7 +54,7 @@
 		- title - string - not null
 	- Address
 		- id - auto gen - pk
-		- contact_id - fk -> Contract
+		- contact_id - fk -> Contact id pk
 		- type - string - not null
 		- number - int
 		- street - string - not null
@@ -64,10 +64,48 @@
 		- zipcode - string
 	- Communication
 		- id - auto gen - pk
-		- contact_id - fk -> Contract
+		- contact_id - fk -> Contact id pk
 		- type - string - not null
 		- value - string - not null 
 		- preferred - string - not null
+# SQL
+* CREATE TABLE Contact
+(
+id int NOT NULL,
+first_name varchar(125) NOT NULL,
+last_name varchar(125) NOT NULL,
+dob date NOT NULL,
+gender char(5) NOT NULL,
+title  varchar(40) NOT NULL,
+PRIMARY KEY (id)
+);
+
+* CREATE TABLE Address
+(
+id int NOT NULL,
+contact_id int NOT NULL,
+type varchar(125) NOT NULL,
+number int,
+street char(150) NOT NULL,
+unit  varchar(150),
+state  varchar(150),
+city  varchar(150) NOT NULL,
+zipcode  varchar(40),
+PRIMARY KEY (id),
+FOREIGN KEY (contact_id) REFERENCES Contact(id)
+);
+
+* CREATE TABLE Communication
+(
+id int NOT NULL,
+contact_id int NOT NULL,
+type varchar(125) NOT NULL,
+value char(150) NOT NULL,
+preferred  boolean NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (contact_id) REFERENCES Contact(id)
+);
+     
 # API
 	-  /contacts -> GET - return the list of contacts
 	- /contacts/{id} -> GET - return contact by ID.
