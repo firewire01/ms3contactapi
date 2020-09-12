@@ -8,8 +8,8 @@
  
 
 
-#Assumptions
-*Valid json schema 
+# Assumptions
+* Valid json schema 
     {
 	"Identification": {
 		"id": 1,
@@ -41,10 +41,10 @@
 	]
 }
 
-*All data fields are clean and conform to json naming standards.
-*All capital and Pascal casing is tranforms to all lower case expect for the main class,
-*This is an Spring boot back end and an Angular front end. using spring boot h2 database.
-*Data base schema:
+* All data fields are clean and conform to json naming standards.
+* All capital and Pascal casing is tranforms to all lower case expect for the main class,
+* This is an Spring boot back end and an Angular front end. using spring boot h2 database.
+* Data base schema:
     - Contact:
 	    - id - auto gen - pk
 		- first_name - string not null
