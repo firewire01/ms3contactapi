@@ -18,9 +18,12 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class UpdateContactComponent implements OnInit {
 
   id: number;
-  contact: Contact;
-  addresses: BehaviorSubject<Address[]>;
-  comms: BehaviorSubject<Communication[]>;
+  contact: Contact = new Contact();
+  submitted = false;
+  addresses: Address[] = [];
+  comms: Communication[] = [];
+  add : Address = new Address();
+  com : Communication = new Communication();
 
   genders: Gender[] = [
     { value: 'M', viewValue: 'Male' },
@@ -30,17 +33,20 @@ export class UpdateContactComponent implements OnInit {
   options: Option[] = [
     { value: 'false', viewValue: 'False' },
     { value: 'true', viewValue: 'True' }
-   
+
   ];
 
 
   constructor(private route: ActivatedRoute,private router: Router,
     private contactService: ContactService) {
-
-  }
-
-  ngOnInit() {
-    this.contact = new Contact();
+    this.contact.Identification = {
+      id: 0,
+      firstName: '',
+      lastName: '',
+      dob: '',
+      gender: '',
+      title: ''
+    }
 
     this.id = this.route.snapshot.params['id'];
 
@@ -48,8 +54,6 @@ export class UpdateContactComponent implements OnInit {
       .subscribe(data => {
         console.log(data)
         this.contact = data;
-        this.contact.Identification.dob =
-          moment(this.contact.Identification.dob).utc().format();
 
         for (let i = 0; i < this.contact.Communication.length; i++) {
           let preferred = this.contact.Communication[i].preferred;
@@ -58,65 +62,56 @@ export class UpdateContactComponent implements OnInit {
           }
         }
 
-        this.addresses = new BehaviorSubject(this.contact.Address);
-        this.comms = new BehaviorSubject(this.contact.Communication);
+        this.addresses = this.contact.Address;
+        this.comms = this.contact.Communication;
 
-      }, error => console.log(error));
+      }, error => {console.log(error);
+                         alert(error.message);});
+  }
+
+  ngOnInit() {
+
   }
 
   updateContact() {
     var date = moment(this.contact.Identification.dob).format('MM/DD/yyyy');
     this.contact.Identification.dob = date;
-    this.contact.Address = this.addresses.getValue();
-    this.contact.Communication = this.comms.getValue();
+
+    this.contact.Address = this.addresses;
+    this.contact.Communication = this.comms;
 
     this.contactService.updateContact(this.contact)
       .subscribe(data => {
         console.log(data);
         this.contact = new Contact();
         this.gotoList();
-      }, error => console.log(error));
+        this.submitted = true;
+      }, error => {console.log(error);
+                         alert(error.message);
+                         this.submitted = false});
   }
 
   onSubmit() {
-    this.updateContact();    
+    this.updateContact();
   }
 
   addAddress() {
+      this.addresses.push(this.add);
+      this.add = new Address();
+    }
 
-    let add = {
-      id: 0,
-      type: '',
-      number: 0,
-      street: '',
-      unit: '',
-      city: '',
-      state: '',
-      zipcode: ''
-    };
+    addComm() {
+      this.comms.push(this.com);
+      this.com = new Communication();
+    }
 
-    this.addresses.next(this.addresses.value.concat(add));
-  }
+    deleteAdd(index){
+      this.addresses.splice(index, 1);
+    }
 
-  addComm() {
-
-    let comm = {
-      id: 0,
-      type: '',
-      value: '',
-      preferred: false
-    };
-
-    this.comms.next(this.comms.value.concat(comm));
-  }
-
-  public getAddresses(): Observable<Address[]> {
-    return this.addresses.asObservable();
-  }
-
-  public getComms(): Observable<Communication[]> {
-    return this.comms.asObservable();
-  }
+    deleteComm(index){
+        this.comms.splice(index, 1);
+    }
 
   gotoList() {
     this.router.navigate(['/contacts']);

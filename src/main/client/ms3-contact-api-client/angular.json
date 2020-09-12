@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/angular8-springboot-client",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -63,8 +64,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular8-springboot-client:build",
-            "proxyConfig": "proxy.conf.json"
+            "browserTarget": "angular8-springboot-client:build"
           },
           "configurations": {
             "production": {
@@ -127,18 +127,29 @@
         },
         "deploy": {
           "builder": "@jefiozie/ngx-aws-deploy:deploy",
-          "options": {},
+          "options": {
+            "secretAccessKey": "sT6BKgHhDRjfWrSMa4TLwt8nbFiYBSTnUCx4UJZT",
+            "accessKeyId": "AKIAISE4FHKYC6E3CQQQ",
+            "region": "ap-southeast-1",
+            "bucket": "ng-contact-management"
+          },
           "configurations": {
             "production": {
               "configuration": "production",
               "region": "ap-southeast-1",
               "bucket": "ng-contact-management",
-              "subFolder": "contact-management"
+              "subFolder": "contact-management",
+              "secretAccessKey": "sT6BKgHhDRjfWrSMa4TLwt8nbFiYBSTnUCx4UJZT",
+              "accessKeyId": "AKIAISE4FHKYC6E3CQQQ"
+
             }
           }
         }
       }
     }
   },
-  "defaultProject": "angular8-springboot-client"
+  "defaultProject": "angular8-springboot-client",
+  "cli": {
+    "analytics": "d17a0982-e33e-4b00-9b88-483c3bbdaf2d"
+  }
 }

@@ -1,13 +1,19 @@
 package com.org.ms3.contactapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.validation.constraints.NotBlank;
 
 public class CommunicationDTO {
 
+    @JsonProperty(value ="id")
     private long id;
 
+    @JsonProperty(value ="type",required = true)
     private String type;
 
+    @JsonProperty(value ="value",required = true)
     private String value;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)

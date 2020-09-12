@@ -1,19 +1,30 @@
 package com.org.ms3.contactapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
 public class IdentificationDTO {
 
+
+    @JsonProperty(value ="id")
     private long id;
+
+    @JsonProperty(value ="firstName",required = true)
     private String firstName;
+
+    @JsonProperty(value ="lastName",required = true)
     private String lastName;
 
     @JsonFormat(pattern="MM/dd/yyyy")
+    @JsonProperty(value ="dob",required = true)
     private Date dob;
 
+    @JsonProperty(value ="gender",required = true)
     private String gender;
+
+    @JsonProperty(value ="title",required = true)
     private String title;
 
     public long getId() {

@@ -1,6 +1,7 @@
 package com.org.ms3.contactapi.dao;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "comm")
@@ -17,9 +18,11 @@ public class Communication {
     private long contactId;
 
     @Column(name = "type", nullable = false)
+    @NotBlank(message = "Communication type is mandatory")
     private String type;
 
     @Column(name = "value", nullable = false)
+    @NotBlank(message = "Communication value is mandatory")
     private String value;
 
     @Column(name = "preferred")

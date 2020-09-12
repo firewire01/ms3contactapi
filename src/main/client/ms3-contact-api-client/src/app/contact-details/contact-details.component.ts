@@ -19,13 +19,22 @@ export class ContactDetailsComponent implements OnInit {
 
     this.contact = new Contact();
 
+      this.contact.Identification = {
+          id: 0,
+          firstName: '',
+          lastName: '',
+          dob: '',
+          gender: '',
+          title: ''
+        }
+
   }
 
   ngOnInit() {
     this.contact = new Contact();
 
     this.id = this.route.snapshot.params['id'];
-    
+
     this.contactService.getContact(this.id)
       .subscribe(data => {
         console.log(data)

@@ -2,7 +2,7 @@ ul {
   display: block;
   list-style-type: decimal;
   margin-top: 1em;
-  margin-bottom: 1 em;
+  margin-bottom: 1em;
   margin-left: 0;
   margin-right: 0;
   padding-left: 40px;
@@ -10,14 +10,37 @@ ul {
 li {
   list-style-type: none;
   margin-top: 1em;
-  margin-bottom: 1 em;
+  margin-bottom: 1em;
   margin-left: 0;
   margin-right: 0;
   padding-left: 40px;
 }
 
-  li:nth-child(1n) {
-    /* replace with whatever style you have for the seperators */
-    border-bottom: 10px solid #999;
-  }
+.fa-close {
+  cursor: pointer;
+}
 
+.add-dev{
+   margin-left: 2em;
+   margin-top: 1em;
+}
+
+.main-component{
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 10px;
+   margin-right: 10px;
+}
+
+.delete-btn{
+ margin-right: 10px;
+}
+
+.submit-btn{
+ margin-top: 5em;
+ margin-bottom: 10px;
+ margin-left: 10px;
+ margin-right: 10px;
+ height: 3em;
+ width: 11em;
+}

@@ -1,6 +1,6 @@
 {
-  "/api/v1": {
-    "target": "http://localhost:8080",
+  "/springboot-crud-rest/api/v1": {
+    "target": "https://ms3contactapi-env-1.eba-zygynhxc.ap-southeast-1.elasticbeanstalk.com",
     "secure": false
   }
 }

@@ -5,12 +5,10 @@
     "\\e2e\\src",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\create-employee",
-    "\\src\\app\\employee-details",
-    "\\src\\app\\employee-list",
-    "\\src\\app\\update-employee",
+    "\\src\\app\\contact-component",
+    "\\src\\app\\update-contact",
     "\\src\\environments"
   ],
-  "SelectedNode": "\\src\\app\\employee.service.spec.ts",
+  "SelectedNode": "\\src\\app\\contact-component\\contact.service.ts",
   "PreviewInSolutionExplorer": false
 }

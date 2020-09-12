@@ -1,22 +1,32 @@
 package com.org.ms3.contactapi.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AddressDTO {
 
+    @JsonProperty(value ="id")
     private long id;
 
+    @JsonProperty(value ="type",required = true)
     private String type;
 
+    @JsonProperty(value ="number")
     private int number;
 
+    @JsonProperty(value ="street",required = true)
     private String street;
 
+    @JsonProperty(value ="unit")
     private String unit;
 
+    @JsonProperty(value ="city",required = true)
     private String city;
 
+    @JsonProperty(value ="state")
     private String state;
 
+    @JsonProperty(value ="zipcode")
     private String zipcode;
 
     public long getId() {

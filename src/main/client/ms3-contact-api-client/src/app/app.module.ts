@@ -9,11 +9,8 @@ import { ContactDetailsComponent } from './contact-details/contact-details.compo
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { UpdateContactComponent } from './update-contact/update-contact.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material';
-import { MatMomentDateModule } from "@angular/material-moment-adapter";
-import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,11 +26,8 @@ import { MatSelectModule } from '@angular/material/select';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatMomentDateModule,
-    MatDividerModule,
-    MatSelectModule
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

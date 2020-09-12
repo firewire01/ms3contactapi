@@ -1,6 +1,7 @@
 package com.org.ms3.contactapi.dao;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
@@ -18,24 +19,27 @@ public class Address implements Serializable {
     private long contactId;
 
     @Column(name = "type", nullable = false)
+    @NotBlank(message = "Address type is mandatory")
     private String type;
 
     @Column(name = "number")
     private int number;
 
     @Column(name = "street", nullable = false)
+    @NotBlank(message = "Address street is mandatory")
     private String street;
 
     @Column(name = "unit")
     private String unit;
 
-    @Column(name = "state", nullable = false)
+    @Column(name = "state")
     private String state;
 
     @Column(name = "city", nullable = false)
+    @NotBlank(message = "Address city is mandatory")
     private String city;
 
-    @Column(name = "zipcode", nullable = false)
+    @Column(name = "zipcode")
     private String zipcode;
 
     public Address() {

@@ -1,99 +1,155 @@
 <h3>Update Contact</h3>
 <div style="width: 400px;">
-  <form (ngSubmit)="onSubmit()">
+  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
     <div class="form-group">
-      <label for="name">First Name</label>
-      <input type="text" class="form-control" id="firstName" required [(ngModel)]="contact.Identification.firstName" name="firstName">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" id="firstName" required [(ngModel)]="contact.Identification.firstName"
+             #firstName="ngModel" name="firstName" [ngClass]="{ 'is-invalid': firstName.touched && firstName.invalid }">
+      <div *ngIf="firstName.touched && firstName.invalid" class="invalid-feedback">
+        <div *ngIf="firstName.errors.required && firstName.touched">First Name is required</div>
+      </div>
     </div>
 
     <div class="form-group">
-      <label for="name">Last Name</label>
-      <input type="text" class="form-control" id="lastName" required [(ngModel)]="contact.Identification.lastName" name="lastName">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" id="lastName" required [(ngModel)]="contact.Identification.lastName" name="lastName"
+             #lastName="ngModel" name="lastName" [ngClass]="{ 'is-invalid': lastName.touched && lastName.invalid }">
+      <div *ngIf="lastName.touched && lastName.invalid" class="invalid-feedback">
+        <div *ngIf="lastName.errors.required && lastName.touched">Last Name is required</div>
+      </div>
     </div>
 
     <div class="form-group">
-      <label for="name">Date of Birth</label>
-      <!--<input type="text" class="form-control" id="dob" required [(ngModel)]="contact.dob" name="dob">-->
-      <input matInput [matDatepicker]="picker" class="form-control" id="dob" required [(ngModel)]="contact.Identification.dob" name="dob">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <label for="dob">Date of Birth</label>
+      <input type="date" matInput class="form-control" id="dob" required [(ngModel)]="contact.Identification.dob"
+             name="dob" #dob="ngModel" name="dob" [ngClass]="{ 'is-invalid': dob.touched && dob.invalid }" value="{{contact.Identification.dob}}">
+      <div *ngIf="dob.touched && dob.invalid" class="invalid-feedback">
+        <div *ngIf="dob.errors.required && dob.touched">Date of Birth is required</div>
+        <div *ngIf="dob.errors.date">Date of Birth must be a valid Date of Birth</div>
+      </div>
     </div>
 
     <div class="form-group">
 
-      <label for="name">Gender</label>
+      <label for="gender">Gender</label>
       <div>
-        <select matNativeControl [(ngModel)]="contact.Identification.gender" name="gender">
-          <option [value]="null"></option>
-          <option *ngFor="let gender of genders" [value]="gender.value">
+        <select matNativeControl [(ngModel)]="contact.Identification.gender" id="gender" name="gender"
+                #gender="ngModel" [ngClass]="{ 'is-invalid': gender.touched && gender.invalid }" required>
+          <option *ngFor="let gender of genders" [value]="gender.value"
+                  [selected]="gender.viewValue === 'Male'">
             {{gender.viewValue}}
           </option>
         </select>
+        <div *ngIf="gender.touched && gender.invalid" class="invalid-feedback">
+          <div *ngIf="gender.errors.required && gender.touched">Gender is required</div>
+        </div>
       </div>
-      <!--<input type="text" class="form-control" id="gender" required [(ngModel)]="contact.Idenfication.gender" name="gender">-->
     </div>
 
     <div class="form-group">
-      <label for="name">Title</label>
-      <input type="text" class="form-control" id="title" required [(ngModel)]="contact.Identification.title" name="title">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" required [(ngModel)]="contact.Identification.title" name="title"
+             #title="ngModel" [ngClass]="{ 'is-invalid': title.touched && title.invalid }" required>
+      <div *ngIf="title.touched && title.invalid" class="invalid-feedback">
+        <div *ngIf="title.errors.required && title.touched">Title is required</div>
+      </div>
     </div>
 
     <div class="form-group">
-      <label for="name">Address: </label>
+      <label >Address: </label>
+
       <div>
-        <button type="button" class="btn btn-info" (click)="addAddress()">Add Address</button>
+        <button type="button" class="btn btn-info" (click)="addAddress()"
+                [disabled]="!add.type || !add.street || !add.city">Add Address</button>
       </div>
-      <div>
-        <ul class="outer_ul">
-          <li *ngFor="let add of addresses | async; let i = index">
-            <label for="name">Type</label>
-            <input type="text" class="form-control" required [(ngModel)]="add.type" [name]="'type' + 1">
-            <label for="name">Number</label>
-            <input type="text" class="form-control" required [(ngModel)]="add.number" [name]="'number' + 1">
-            <label for="name">Street</label>
-            <input type="text" class="form-control" required [(ngModel)]="add.street" [name]="'street' + 1">
-            <label for="name">Unit</label>
-            <input type="text" class="form-control" required [(ngModel)]="add.unit" [name]="'unit' + 1">
-            <label for="name">City</label>
-            <input type="text" class="form-control" required [(ngModel)]="add.city" [name]="'city' + 1">
-            <label for="name">State</label>
-            <input type="text" class="form-control" required [(ngModel)]="add.state" [name]="'state' + 1">
-            <label for="name">Zipcode</label>
-            <input type="text" class="form-control" required [(ngModel)]="add.zipcode" [name]="'zipcode' + 1">
-            <button type="button" class="btn btn-danger component" (click)="removeAddress(add)">X</button>
+      <div class="add-dev">
+        <label for="a-type">Type</label>
+        <input type="text" class="form-control" [(ngModel)]="add.type" name="a-type" id="a-type"
+               #aType="ngModel" [ngClass]="{ 'is-invalid': addresses.length < 1 && aType.touched && aType.invalid }" >
+        <div *ngIf="addresses.length < 1 && aType.touched && aType.invalid" class="invalid-feedback">
+          <div *ngIf="addresses.length < 1 && aType.errors.required && aType.touched">Address type is required</div>
+        </div>
+        <label for="a-number">Number</label>
+        <input type="text" class="form-control" [(ngModel)]="add.number" name="number" id="a-number">
+        <label for="a-street">Street</label>
+        <input type="text" class="form-control" [(ngModel)]="add.street" name="street" id="a-street"
+               #street="ngModel" [ngClass]="{ 'is-invalid': addresses.length < 1 && street.touched && street.invalid }" >
+        <div *ngIf="addresses.length < 1 && street.touched && street.invalid" class="invalid-feedback">
+          <div *ngIf="addresses.length < 1 && street.errors.required && street.touched">Address street is required</div>
+        </div>
+        <label for="a-unit">Unit</label>
+        <input type="text" class="form-control" [(ngModel)]="add.unit" name="unit" id="a-unit">
+        <label for="a-city">City</label>
+        <input type="text" class="form-control" [(ngModel)]="add.city" name="city" id="a-city"
+               #city="ngModel" [ngClass]="{ 'is-invalid': addresses.length < 1 && city.touched && city.invalid }" >
+        <div *ngIf="addresses.length < 1 && city.touched && city.invalid" class="invalid-feedback">
+          <div *ngIf="addresses.length < 1 && city.errors.required && city.touched">Address city is required</div>
+        </div>
+        <label for="a-state">State</label>
+        <input type="text" class="form-control" [(ngModel)]="add.state" name="state" id="a-state">
+        <label for="a-zcode">Zipcode</label>
+        <input type="text" class="form-control" [(ngModel)]="add.zipcode" name="zipcode" id="a-zcode">
+      </div>
+      <div class="main-component">
+        <ul>
+          <li *ngFor="let address of addresses; let i = index">
+            <button type="button" class="btn btn-danger delete-btn" (click)="deleteAdd(i)"
+            >X</button>
+            <span><b>Street:</b> {{address.street}}, </span>
+            <span><b>City:</b> {{address.city}}</span>
           </li>
         </ul>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="name">Communication: </label>
+      <label>Communication: </label>
       <div>
-        <button type="button" class="btn btn-info" (click)="addComm()">Add Communication</button>
+        <button type="button" class="btn btn-info" (click)="addComm()"
+                [disabled]="!com.type || !com.value">Add Communication</button>
       </div>
-      <ul class="outer_ul">
-        <li *ngFor="let com of comms | async; let i = index">
-          <label for="name">Type</label>
-          <input type="text" class="form-control" required [(ngModel)]="com.type" [name]="'type' + i">
-          <label for="name">Value</label>
-          <input type="text" class="form-control" required [(ngModel)]="com.value" [name]="'value' + i">
-          <label for="name">Preferred</label>
-          <div>
-            <select matNativeControl [(ngModel)]="com.preferred" [name]="'preferred' + i">
-              <option *ngFor="let option of options" [value]="option.value">
-                {{option.viewValue}}
-              </option>
-            </select>
+      <div class="add-dev">
+        <label for="c-type">Type</label>
+        <input type="text" class="form-control"  [(ngModel)]="com.type" name="ctype" id="c-type"
+               #cType="ngModel" [ngClass]="{ 'is-invalid': comms.length < 1 && cType.touched && cType.invalid }" >
+        <div *ngIf="cType.touched && cType.invalid" class="invalid-feedback">
+          <div *ngIf="cType.errors.required && cType.touched">Communication type is required</div>
+        </div>
+        <label for="c-value">Value</label>
+        <input type="text" class="form-control"  [(ngModel)]="com.value" name="value" id="c-value"
+               *ngIf="com.type !== 'email'" #value="ngModel" [ngClass]="{ 'is-invalid': comms.length < 1 && value.touched && value.invalid }">
+        <input type="email" class="form-control"  [(ngModel)]="com.value" name="value" id="e-value"
+               *ngIf="com.type === 'email'"
+               #email="ngModel" [ngClass]="{ 'is-invalid': comms.length < 1 && email.touched && email.invalid }" >
+        <label for="c-preferred">Preferred</label>
+        <div>
+          <select matNativeControl [(ngModel)]="com.preferred" name="preferred" id="c-preferred"
+                  #preferred="ngModel" [ngClass]="{ 'is-invalid': comms.length < 1 && preferred.touched && preferred.invalid }" >
+            <option *ngFor="let option of options" [value]="option.value"
+                    [selected]="option.viewValue === 'False'">
+              {{option.viewValue}}
+            </option>
+          </select>
+          <div *ngIf="comms.length < 1 && preferred.touched && preferred.invalid" class="invalid-feedback">
+            <div *ngIf="comms.length < 1 && preferred.errors.required && preferred.touched">Communication preferred preference is required</div>
           </div>
-          <button type="button" class="btn btn-danger component" (click)="removeComm(com)">X</button>
-        </li>
-      </ul>
+        </div>
+      </div>
+      <div class="main-component">
+        <ul>
+          <li *ngFor="let com of comms; let i = index">
+            <button type="button" class="btn btn-danger delete-btn" (click)="deleteComm(i)"
+            >X</button>
+            <span><b>Type:</b> {{com.type}}, </span>
+            <span><b>Value:</b> {{com.value}}</span>
+          </li>
+        </ul>
+      </div>
+
     </div>
 
-    <div class="btn-group">
-      <button (click)="gotoList()" class="btn btn-primary button_group">Back to Contact List</button><br>
-      <button type="submit" class="btn btn-success button_group">Submit</button>
-    </div>
-    
+    <button type="submit" class="btn submit-btn btn-success" [disabled]="!f.form.valid || addresses.length < 1 ||
+                  comms.length < 1 ">Submit</button>
+    <div><label><h4><i>Please note to supply all valid fields and required.</i></h4></label></div>
   </form>
 </div>

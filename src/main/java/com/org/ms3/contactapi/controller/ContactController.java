@@ -1,5 +1,7 @@
 package com.org.ms3.contactapi.controller;
 
+import com.org.ms3.contactapi.common.SaveImp;
+import com.org.ms3.contactapi.common.UpdateImp;
 import com.org.ms3.contactapi.dto.ContactDTO;
 import com.org.ms3.contactapi.exception.ResourceNotFoundException;
 import com.org.ms3.contactapi.services.IContactService;
@@ -18,7 +20,13 @@ import java.util.Map;
 public class ContactController {
 
     @Autowired
-    IContactService contractService;
+    private IContactService contractService;
+
+    @Autowired
+    private SaveImp saveImp;
+
+    @Autowired
+    private UpdateImp updateImp;
 
     @GetMapping("/contacts")
     public List<ContactDTO> getAllContacts() {
@@ -33,13 +41,13 @@ public class ContactController {
 
     @PostMapping("/contacts")
     public  ContactDTO createContact(@Valid @RequestBody ContactDTO contactDTO) {
-        return contractService.save(contactDTO);
+        return contractService.save(contactDTO, saveImp);
     }
 
     @PutMapping("/contacts")
     public ResponseEntity<ContactDTO> updateContact(@Valid @RequestBody ContactDTO contactDTO)
             throws ResourceNotFoundException {
-        return ResponseEntity.ok(contractService.save(contactDTO));
+        return ResponseEntity.ok(contractService.save(contactDTO, updateImp));
     }
 
     @DeleteMapping("/contacts/{id}")

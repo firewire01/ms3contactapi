@@ -1,5 +1,6 @@
 package com.org.ms3.contactapi.services;
 
+import com.org.ms3.contactapi.common.IContactSave;
 import com.org.ms3.contactapi.dao.*;
 import com.org.ms3.contactapi.dto.AddressDTO;
 import com.org.ms3.contactapi.dto.CommunicationDTO;
@@ -8,16 +9,18 @@ import com.org.ms3.contactapi.exception.ResourceNotFoundException;
 import com.org.ms3.contactapi.repository.AddressRepository;
 import com.org.ms3.contactapi.repository.CommunicationRepository;
 import com.org.ms3.contactapi.repository.ContactRepository;
+import jdk.jfr.internal.LogLevel;
+import jdk.jfr.internal.LogTag;
+import jdk.jfr.internal.Logger;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
-import org.modelmapper.TypeMap;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,56 +42,8 @@ public class ContactServices extends BaseService
 
     @Transactional
     @Override
-    public ContactDTO save(ContactDTO contactDTO) {
-        Contact contact = new Contact();
-
-        modelMapper.map(contactDTO.getIdentificationDTO(), contact);
-
-        List<Address> addressList = contactDTO
-                .getAddressDTOList().stream().map(addressDTO ->
-                {
-                    Address address = new Address();
-                    BeanUtils.copyProperties(addressDTO, address);
-                    return address;
-                }).collect(Collectors.toList());
-
-        List<Communication> communicationList = contactDTO
-                .getCommunicationDTOList().stream().map(s ->
-                {
-                    Communication communication = new Communication();
-                    BeanUtils.copyProperties(s, communication);
-                    return communication;
-                }).collect(Collectors.toList());
-
-        System.out.println("Contract: " + ToStringBuilder.reflectionToString(contact,
-                ToStringStyle.SIMPLE_STYLE));
-        System.out.println("Contract DTO: " + ToStringBuilder.reflectionToString(contactDTO,
-                ToStringStyle.SIMPLE_STYLE));
-
-        contact = contactRepository.save(contact);
-        final Long contactId = contact.getId();
-        addressList.stream().forEach(a -> a.setContactId(contactId));
-        communicationList.stream().forEach(a -> a.setContactId(contactId));
-
-        System.out.println("List Address:");
-        for (Address a:
-        addressList) {
-            System.out.println("Address: " + ToStringBuilder.reflectionToString(a,
-                    ToStringStyle.SIMPLE_STYLE));
-        }
-
-        System.out.println("List Communication:");
-        for (Communication a:
-                communicationList) {
-            System.out.println("Communication: " + ToStringBuilder.reflectionToString(a,
-                    ToStringStyle.SIMPLE_STYLE));
-        }
-
-        addressRepository.saveAll(addressList);
-        communicationRepository.saveAll(communicationList);
-
-        contactDTO = contactToContactDTO(contact, contactDTO);
-        return contactDTO;
+    public ContactDTO save(ContactDTO contactDTO, IContactSave iContactSave) {
+        return contactToContactDTO(iContactSave.save(contactDTO), contactDTO);
     }
 
     @Transactional
@@ -122,9 +77,6 @@ public class ContactServices extends BaseService
 
         List<Contact> contactList = contactRepository.findAll();
 
-        System.out.println("list: \\n" +
-                ToStringBuilder.reflectionToString(contactList, ToStringStyle.SIMPLE_STYLE));
-
         contactDTOS = contactList.stream().map(
                 c -> contactToContactDTO(c, new ContactDTO())
         ).collect(Collectors.toList());
@@ -132,10 +84,14 @@ public class ContactServices extends BaseService
         return contactDTOS;
     }
 
+    /**
+     * Helper method for contract To contract DTO
+     *
+     * @param contact
+     * @param contactDTO
+     * @return
+     */
     private ContactDTO contactToContactDTO(Contact contact, ContactDTO contactDTO){
-
-        System.out.println(
-                ToStringBuilder.reflectionToString(contact, ToStringStyle.SIMPLE_STYLE));
 
         modelMapper.map(contact, contactDTO.getIdentificationDTO());
         List<Address> addressList = addressRepository.findByContactId(contact.getId());
@@ -148,8 +104,6 @@ public class ContactServices extends BaseService
                     AddressDTO addressDTO =
                             new AddressDTO();
                     BeanUtils.copyProperties(a, addressDTO);
-                    System.out.println(a);
-                    System.out.println(addressDTO);
                     return addressDTO;
                 }).collect(Collectors.toList())
         );
@@ -160,19 +114,12 @@ public class ContactServices extends BaseService
                     CommunicationDTO communicationDTO =
                             new CommunicationDTO();
                     BeanUtils.copyProperties(com, communicationDTO);
-                    System.out.println(com);
-                    System.out.println(communicationDTO);
                     return communicationDTO;
                 }).collect(Collectors.toList())
         );
 
-        System.out.println(
-                ToStringBuilder.reflectionToString(contactDTO, ToStringStyle.SIMPLE_STYLE));
-        System.out.println(
-                ToStringBuilder.reflectionToString(addressList, ToStringStyle.SIMPLE_STYLE));
-        System.out.println(
-                ToStringBuilder.reflectionToString(communicationSet, ToStringStyle.SIMPLE_STYLE));
-
         return contactDTO;
     }
+
+
 }
