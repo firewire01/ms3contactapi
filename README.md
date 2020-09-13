@@ -4,7 +4,8 @@
 - GitHub: https://github.com/firewire01/ms3contactapi
 	- Used gulp and docker to setup CI/CD and dockerize deployment.
 	- Only have a test lint in Angular. Remove spring side for errors in deployment.
-- AWS Url Link: http://ms3contactapi-env-1.eba-zygynhxc.ap-southeast-1.elasticbeanstalk.com/addcontact
+- AWS Url Link:
+  http://ms3contactapi-env.eba-i5amy7xm.ap-southeast-1.elasticbeanstalk.com/
  
 
 
@@ -114,21 +115,21 @@ FOREIGN KEY (contact_id) REFERENCES Contact(id)
 	- /contacts/{id} -> DELETE -> deletion per contact id.
 # How to run app. 
 - This lunch in the AWS - Elastic Beanstalk
-- Url: http://ms3contactapi-env-1.eba-zygynhxc.ap-southeast-1.elasticbeanstalk.com:8080
+- Url: http://ms3contactapi-env.eba-i5amy7xm.ap-southeast-1.elasticbeanstalk.com/
   *Note: this is just a free tier not sure if the dns will change. please contact me if the link is not accessable.
 *First: 
-   - Go to this link first to initilze the site http://ms3contactapi-env-1.eba-zygynhxc.ap-southeast-1.elasticbeanstalk.com:8080
+   - Go to this link first to initilze the site http://ms3contactapi-env.eba-i5amy7xm.ap-southeast-1.elasticbeanstalk.com/
 *There is two menu in the top left part: 
 	* Contact List -> Will have a all contact list view. initially its empty.
 		- Button navigation:
 			- Delete -> Delete contact by id
 			- Update -> all fields will be populated.
 				- Supply all required fields:
-				- First Name
-				- Last Name
-				- Date of Birth
-				- Gender
-				- Title
+				- First Name - because this sa vital info of contact.
+				- Last Name - because this sa vital info of contact.
+				- Date of Birth - because this sa vital info of contact.
+				- Gender - because this sa vital info of contact.
+				- Title - because this sa vital info of contact.
 				- Address: at least one
 					- Type
 					- Street
@@ -143,7 +144,7 @@ FOREIGN KEY (contact_id) REFERENCES Contact(id)
 					- Update -> Update Contact if all fields are valid.
 			- Details -> Display details of the contact by id
 	- Add Contact -> This will create the contact.
-		- Supply all required fields:
+		- Supply all required fields: All fields are considered vital info for the contact.
 			- First Name
 			- Last Name
 			- Date of Birth
