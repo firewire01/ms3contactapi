@@ -119,7 +119,7 @@ FOREIGN KEY (contact_id) REFERENCES Contact(id)
   *Note: this is just a free tier not sure if the dns will change. please contact me if the link is not accessable.
 *First: 
    - Go to this link first to initilze the site http://ms3contactapi-env.eba-i5amy7xm.ap-southeast-1.elasticbeanstalk.com/
-*There is two menu in the top left part: 
+* There is two menu in the top left part: 
 	* Contact List -> Will have a all contact list view. initially its empty.
 		- Button navigation:
 			- Delete -> Delete contact by id
